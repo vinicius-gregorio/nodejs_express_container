@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  app:
+    container_name: app
+    build:
+      context: ./nodejs-app-docker
+    networks:
+      - fullcycle
+    volumes:
+      - ./nodejs-app-docker:/usr/src/app
+    ports: 
+      - "3000:3000"
+
+  db: 
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: mysql-db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - fullcycle
+
+
+networks:
+  fullcycle: 
+    driver: bridge
+
+
+
+
+#docker compose-up -d --build
+
+
+# Entrando no db => docker exec -it mysql-db bash
+# Entrando no usuario => mysql -uroot -p
+# Vendo se o db foi criado => show databases;
+# escolhendo o db => use nodedb;
+# Criando tabela => create table people(id int not null auto_increment, name varchar(255), primary key(id));
+# Vendo a tabela criada => desc people;

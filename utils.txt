@@ -1,0 +1,13 @@
+Command:
+docker run --rm -it -v $(pwd)/:/usr/src/app -p 3000:3000 node:15 bash
+
+Explain:
+Run docker, remove container after used,
+interactive mode,
+go to this folder that is the same in container,
+match port 3000'
+image name
+run bash Command
+
+Alternativas:
+docker run --rm -it -v C:\Users\Gregorio\Documents\Dev\Full_cycle\docker\nodejs-app-docker -p 3000:3000 node:15 bash
